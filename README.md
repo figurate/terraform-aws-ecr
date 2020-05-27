@@ -11,13 +11,18 @@ No requirements.
 | Name | Version |
 |------|---------|
 | aws | n/a |
+| null | n/a |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| import\_frequency | Indicates how often to check the source registry for updates (once, weekly, daily, hourly, always) | `string` | `"daily"` | no |
 | name | ECR repository name | `any` | n/a | yes |
-| untagged\_image\_expiry\_days | Age (in days) of untagged images to be removed automatically | `number` | `14` | no |
+| scan\_on\_push | Automatically scan pushed images for vulnerabilities | `bool` | `true` | no |
+| source\_registry | The source registry for importing images (note this should include the trailing forward slash (e.g. `registry1.docker.io/`)) | `string` | `""` | no |
+| source\_tags | A list of tags for image import from external registry | `list(string)` | <pre>[<br>  "latest"<br>]</pre> | no |
+| untagged\_image\_expiry\_days | Age (in days) of untagged images to be removed automatically | `number` | `7` | no |
 
 ## Outputs
 

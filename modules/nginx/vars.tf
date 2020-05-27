@@ -1,5 +1,6 @@
 variable "name" {
   description = "ECR repository name"
+  default = "nginx"
 }
 
 variable "scan_on_push" {
@@ -15,12 +16,7 @@ variable "untagged_image_expiry_days" {
 
 variable "import_frequency" {
   description = "Indicates how often to check the source registry for updates (once, weekly, daily, hourly, always)"
-  default     = "daily"
-}
-
-variable "source_registry" {
-  description = "The source registry for importing images (note this should include the trailing forward slash (e.g. `registry1.docker.io/`))"
-  default     = ""
+  default     = "weekly"
 }
 
 variable "source_tags" {
