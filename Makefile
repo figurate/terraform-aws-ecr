@@ -12,6 +12,9 @@ clean:
 test:
 	$(TERRAFORM) init && $(TERRAFORM) validate
 
+nginx:
+	$(TERRAFORM) init modules/nginx && $(TERRAFORM) plan modules/nginx
+
 docs:
 	docker run --rm -v "${PWD}:/work" tmknom/terraform-docs markdown ./ >./README.md
 
