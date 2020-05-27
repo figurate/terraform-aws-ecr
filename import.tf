@@ -2,9 +2,9 @@
  * Synchronise image from external Docker registry.
  */
 resource "null_resource" "source_ecr_login" {
-  count = length(var.source_registry) > 0 ? 1 : 0
+  count = var.import_frequency != "never" && length(var.source_registry) > 0 ? 1 : 0
   triggers = {
-    always_run = timestamp()
+    import = local.import_triggers[var.import_frequency]
   }
   provisioner "local-exec" {
     command = "$(aws ecr get-login --registry-ids ${split(".", var.source_registry)[0]} --no-include-email)"
@@ -12,9 +12,9 @@ resource "null_resource" "source_ecr_login" {
 }
 
 resource "null_resource" "source_pull" {
-  count = length(var.source_tags)
+  count = var.import_frequency != "never" ? length(var.source_tags) : 0
   triggers = {
-    always_run = timestamp()
+    import = local.import_triggers[var.import_frequency]
   }
   provisioner "local-exec" {
     command = "docker pull ${local.import_registry}${var.name}:${var.source_tags[count.index]}"
@@ -23,8 +23,9 @@ resource "null_resource" "source_pull" {
 }
 
 resource "null_resource" "ecr_login" {
+  count = var.import_frequency != "never" ? 1 : 0
   triggers = {
-    always_run = timestamp()
+    import = local.import_triggers[var.import_frequency]
   }
   provisioner "local-exec" {
     command = "$(aws ecr get-login --no-include-email)"
@@ -33,7 +34,7 @@ resource "null_resource" "ecr_login" {
 }
 
 resource "null_resource" "ecr_push" {
-  count = length(var.source_tags)
+  count = var.import_frequency != "never" ? length(var.source_tags) : 0
   triggers = {
     import = local.import_triggers[var.import_frequency]
   }
