@@ -9,8 +9,11 @@ all: test docs format
 clean:
 	rm -rf .terraform/
 
-test:
-	$(TERRAFORM) init && $(TERRAFORM) validate
+init:
+	$(TERRAFORM) init
+
+test: init
+	$(TERRAFORM) validate
 
 nginx:
 	$(TERRAFORM) init modules/nginx && $(TERRAFORM) plan modules/nginx

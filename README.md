@@ -2,6 +2,10 @@
 
 Purpose: Defaults for ECR repositories.
 
+Requirements: To execute the image import the execution environment must have the following installed:
+* Docker
+* AWS CLI
+
 ## Requirements
 
 No requirements.
