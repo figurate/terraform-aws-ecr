@@ -15,7 +15,7 @@ variable "untagged_image_expiry_days" {
 
 variable "import_frequency" {
   description = "Indicates how often to check the source registry for updates (`once`, `weekly`, `daily`, `hourly`, `always`, `never`)"
-  default     = "daily"
+  default     = "never"
 }
 
 variable "source_registry" {

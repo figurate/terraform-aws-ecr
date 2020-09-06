@@ -21,7 +21,7 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| import\_frequency | Indicates how often to check the source registry for updates (`once`, `weekly`, `daily`, `hourly`, `always`, `never`) | `string` | `"daily"` | no |
+| import\_frequency | Indicates how often to check the source registry for updates (`once`, `weekly`, `daily`, `hourly`, `always`, `never`) | `string` | `"never"` | no |
 | name | ECR repository name | `any` | n/a | yes |
 | scan\_on\_push | Automatically scan pushed images for vulnerabilities | `bool` | `true` | no |
 | source\_registry | The source registry for importing images (note this should include the trailing forward slash (e.g. `registry1.docker.io/`)) | `string` | `""` | no |
