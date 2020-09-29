@@ -4,7 +4,11 @@ TERRAFORM=docker run --rm -v "${PWD}:/work" -e AWS_DEFAULT_REGION=$(AWS_DEFAULT_
 
 TERRAFORM_DOCS=docker run --rm -v "${PWD}:/work" tmknom/terraform-docs
 
-CHECKOV=docker run -t -v "${PWD}:/work" bridgecrew/checkov
+CHECKOV=docker run --rm -t -v "${PWD}:/work" bridgecrew/checkov
+
+TFSEC=docker run --rm -it -v "${PWD}:/work" liamg/tfsec
+
+DIAGRAMS=docker run -t -v "${PWD}:/work" figurate/diagrams python
 
 .PHONY: all clean validate test docs format
 
@@ -13,19 +17,21 @@ all: validate test docs format
 clean:
 	rm -rf .terraform/
 
-init:
-	$(TERRAFORM) init
-
-validate: init
-	$(TERRAFORM) validate
+validate:
+	$(TERRAFORM) init && $(TERRAFORM) validate
 
 test: validate
 	$(CHECKOV) -d /work
+	$(TFSEC) /work
 
 nginx:
 	$(TERRAFORM) init modules/nginx && $(TERRAFORM) plan modules/nginx
 
-docs:
+
+diagram:
+	$(DIAGRAMS) diagram.py
+
+docs: diagram
 	$(TERRAFORM_DOCS) markdown ./ >./README.md
 
 format:

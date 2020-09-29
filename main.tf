@@ -1,6 +1,8 @@
 /**
  * # ![AWS](aws-logo.png) ECR Repository
  *
+ * ![AWS ECR Repository](aws_ecr_repository.png)
+ *
  * Purpose: Defaults for ECR repositories.
  *
  * Requirements: To execute the image import the execution environment must have the following installed:
