@@ -34,4 +34,5 @@ docs: diagram
 	$(TERRAFORM_DOCS) markdown ./ >./README.md
 
 format:
-	$(TERRAFORM) fmt -list=true ./
+	$(TERRAFORM) fmt -list=true ./ && \
+		$(TERRAFORM) fmt -list=true ./examples/nginx
