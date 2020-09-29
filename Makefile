@@ -10,6 +10,8 @@ TFSEC=docker run --rm -it -v "${PWD}:/work" liamg/tfsec
 
 DIAGRAMS=docker run -t -v "${PWD}:/work" figurate/diagrams python
 
+EXAMPLE=$(wordlist 2, $(words $(MAKECMDGOALS)), $(MAKECMDGOALS))
+
 .PHONY: all clean validate test docs format
 
 all: validate test docs format
@@ -24,9 +26,6 @@ test: validate
 	$(CHECKOV) -d /work
 	$(TFSEC) /work
 
-nginx:
-	$(TERRAFORM) init examples/nginx && $(TERRAFORM) plan examples/nginx
-
 diagram:
 	$(DIAGRAMS) diagram.py
 
@@ -36,3 +35,6 @@ docs: diagram
 format:
 	$(TERRAFORM) fmt -list=true ./ && \
 		$(TERRAFORM) fmt -list=true ./examples/nginx
+
+example:
+	$(TERRAFORM) init examples/$(EXAMPLE) && $(TERRAFORM) plan examples/$(EXAMPLE)
