@@ -1,8 +1,3 @@
-variable "name" {
-  description = "ECR repository name"
-  default = "nginx"
-}
-
 variable "scan_on_push" {
   description = "Automatically scan pushed images for vulnerabilities"
   default     = true
@@ -16,7 +11,7 @@ variable "untagged_image_expiry_days" {
 
 variable "import_frequency" {
   description = "Indicates how often to check the source registry for updates (once, weekly, daily, hourly, always)"
-  default     = "weekly"
+  default     = "daily"
 }
 
 variable "source_tags" {

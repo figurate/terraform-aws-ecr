@@ -1,6 +1,6 @@
 SHELL:=/bin/bash
 TERRAFORM_VERSION=0.12.24
-TERRAFORM=docker run --rm -v "${PWD}:/work" -e AWS_DEFAULT_REGION=$(AWS_DEFAULT_REGION) -e http_proxy=$(http_proxy) --net=host -w /work hashicorp/terraform:$(TERRAFORM_VERSION)
+TERRAFORM=docker run --rm -v "${PWD}:/work" -v "${HOME}:/root" -e AWS_DEFAULT_REGION=$(AWS_DEFAULT_REGION) -e http_proxy=$(http_proxy) --net=host -w /work hashicorp/terraform:$(TERRAFORM_VERSION)
 
 TERRAFORM_DOCS=docker run --rm -v "${PWD}:/work" tmknom/terraform-docs
 
@@ -25,8 +25,7 @@ test: validate
 	$(TFSEC) /work
 
 nginx:
-	$(TERRAFORM) init modules/nginx && $(TERRAFORM) plan modules/nginx
-
+	$(TERRAFORM) init examples/nginx && $(TERRAFORM) plan examples/nginx
 
 diagram:
 	$(DIAGRAMS) diagram.py
