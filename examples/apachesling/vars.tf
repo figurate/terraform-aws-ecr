@@ -14,3 +14,7 @@ variable "source_tags" {
   type        = list(string)
   default     = ["latest"]
 }
+
+variable "aws_region" {
+  description = "AWS region for running ECR commands"
+}

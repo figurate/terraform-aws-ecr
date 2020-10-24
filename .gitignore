@@ -1,3 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
 terraform-aws-ecr-repository.iml
 .terraform/
+*.tfvars
+*tfstate*
