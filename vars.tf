@@ -12,19 +12,3 @@ variable "untagged_image_expiry_days" {
   type        = number
   default     = 7
 }
-
-variable "import_frequency" {
-  description = "Indicates how often to check the source registry for updates (`once`, `weekly`, `daily`, `hourly`, `always`, `never`)"
-  default     = "never"
-}
-
-variable "source_registry" {
-  description = "The source registry for importing images (note this should include the trailing forward slash (e.g. `registry1.docker.io/`))"
-  default     = ""
-}
-
-variable "source_tags" {
-  description = "A list of tags for image import from external registry"
-  type        = list(string)
-  default     = ["latest"]
-}
