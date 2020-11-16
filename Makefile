@@ -35,7 +35,8 @@ docs: diagram
 format:
 	$(TERRAFORM) fmt -list=true ./ && \
 		$(TERRAFORM) fmt -list=true ./examples/nginx && \
-		$(TERRAFORM) fmt -list=true ./examples/apachesling
+		$(TERRAFORM) fmt -list=true ./examples/apachesling && \
+		$(TERRAFORM) fmt -list=true ./examples/haproxy
 
 example:
-	$(TERRAFORM) init examples/$(EXAMPLE) && $(TERRAFORM) plan examples/$(EXAMPLE)
+	$(TERRAFORM) init -upgrade examples/$(EXAMPLE) && $(TERRAFORM) plan examples/$(EXAMPLE)

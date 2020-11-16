@@ -10,7 +10,7 @@ module "import" {
   count  = length(var.source_tags)
   source = "figurate/docker-container/docker//modules/ecr"
 
-  name = "apachesling_push_${var.source_tags[count.index]}"
+  name       = "apachesling_push_${var.source_tags[count.index]}"
   command    = ["push", "apache/sling", var.source_tags[count.index], var.source_tags[count.index]]
   depends_on = [module.repository]
   rm         = false
