@@ -2,6 +2,9 @@
 
 name: CI
 
+env:
+  skip_examples: true
+
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
@@ -30,6 +33,7 @@ jobs:
 
       - name: Verify example apachesling
         run: make example apachesling
+        if: ${{ !env.skip_examples }}
         env:
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -37,6 +41,7 @@ jobs:
 
       - name: Verify example nginx
         run: make example nginx
+        if: ${{ !env.skip_examples }}
         env:
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
