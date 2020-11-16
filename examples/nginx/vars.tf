@@ -18,3 +18,8 @@ variable "source_tags" {
 variable "aws_region" {
   description = "AWS region for running ECR commands"
 }
+
+variable "import_enabled" {
+  description = "Flag to enable push to ECR"
+  default = false
+}

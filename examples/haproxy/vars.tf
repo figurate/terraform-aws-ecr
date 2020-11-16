@@ -8,3 +8,8 @@ variable "aws_region" {
   description = "AWS region for running ECR commands"
   default     = "ap-southeast-2"
 }
+
+variable "import_enabled" {
+  description = "Flag to enable push to ECR"
+  default = false
+}

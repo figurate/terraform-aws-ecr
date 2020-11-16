@@ -7,7 +7,7 @@ module "repository" {
 }
 
 module "import" {
-  count  = length(var.source_tags)
+  count  = var.import_enabled ? length(var.source_tags) : 0
   source = "figurate/docker-container/docker//modules/ecr"
 
   name       = "nginx_push_${var.source_tags[count.index]}"
