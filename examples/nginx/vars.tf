@@ -12,7 +12,7 @@ variable "untagged_image_expiry_days" {
 variable "source_tags" {
   description = "A list of tags for image import from external registry"
   type        = list(string)
-  default     = ["latest"]
+  default     = ["latest", "alpine"]
 }
 
 variable "aws_region" {
